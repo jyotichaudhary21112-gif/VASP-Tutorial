@@ -12,7 +12,17 @@ $$\hat{H}\Psi = E\Psi$$
 
 For a realistic solid with $N$ electrons and $M$ nuclei, the full quantum mechanical Hamiltonian operator $\hat{H}$ consists of five distinct terms:
 
-$$\hat{H} = -\sum_{i=1}^{N} \frac{\hbar^2}{2m_e}\nabla_i^2 - \sum_{A=1}^{M} \frac{\hbar^2}{2M_A}\nabla_A^2 - \sum_{i=1}^{N}\sum_{A=1}^{M} \frac{Z_A e^2}{4\pi\epsilon_0 r_{iA}} + \sum_{i<j}^{N} \frac{e^2}{4\pi\epsilon_0 r_{ij}} + \sum_{A<B}^{M} \frac{Z_A Z_B e^2}{4\pi\epsilon_0 R_{AB}}$$
+To find the ground-state energy of a crystal lattice, we must solve the time-independent Schrödinger equation for a system of interacting nuclei and electrons:
+
+$$
+\hat{H}\Psi = E\Psi
+$$
+
+For a realistic solid with $N$ electrons and $M$ nuclei, the full quantum mechanical Hamiltonian operator $\hat{H}$ consists of five distinct terms:
+
+$$
+\hat{H} = -\sum_{i=1}^{N}\frac{\hbar^{2}}{2m_{e}}\nabla_{i}^{2}-\sum_{A=1}^{M}\frac{\hbar^{2}}{2M_{A}}\nabla_{A}^{2}-\sum_{i=1}^{N}\sum_{A=1}^{M}\frac{Z_{A}e^{2}}{4\pi\epsilon_{0}r_{iA}}+\sum_{i<j}^{N}\frac{e^{2}}{4\pi\epsilon_{0}r_{ij}}+\sum_{A<B}^{M}\frac{Z_{A}Z_{B}e^{2}}{4\pi\epsilon_{0}R_{AB}}
+$$
 
 ### The Terms Broken Down:
 1. **Electronic Kinetic Energy:** Kinetic movement of all electrons.
