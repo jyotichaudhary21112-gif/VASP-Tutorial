@@ -4,18 +4,17 @@ site_description: A complete hands-on workflow manual for VASP calculations.
 theme:
   name: material
   palette:
-    # Automatic palette switching based on system preferences
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: indigo
-      accent: blue
+      primary: teal
+      accent: teal
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: indigo
-      accent: blue
+      primary: teal
+      accent: teal
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
@@ -33,5 +32,5 @@ markdown_extensions:
   - details
 
 extra_javascript:
-  - javascripts/mathjax.js
+  - docs/javascripts/mathjax.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
