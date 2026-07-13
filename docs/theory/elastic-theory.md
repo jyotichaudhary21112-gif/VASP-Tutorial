@@ -59,14 +59,16 @@ Let us track how increasing crystal operations systematically eliminate and link
 
 ---
 
-### 1. Monoclinic System (13 Independent Constants)
-Characterized by a single 2-fold rotation axis or a mirror plane perpendicular to an axis (traditionally chosen along the $y$ or $z$ axis). Assuming a 2-fold rotation about the $z$-axis ($x_3$), the transformation matrix is:
+### 1. Monoclinic System (1 Two-Fold Rotation Axis $\rightarrow$ 13 Independent Constants)
+Characterized by a single 2-fold rotation axis ($C_2$) or a mirror plane perpendicular to an axis (traditionally chosen along the $y$ or $z$ axis). Assuming a 2-fold rotation about the $z$-axis ($x_3$), the transformation matrix is:
 
 $$
 a = \begin{bmatrix} -1 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & 1 \end{bmatrix}
 $$
 
-Applying $C'_{ijkl} = a_{im}a_{jn}a_{kp}a_{lq}C_{mnpq}$, any component containing an odd number of indices with value `1` or `2` flips sign ($C'_{ijkl} = -C_{ijkl}$). To satisfy Neumann's Principle, these terms must vanish: $C_{14} = C_{15} = C_{24} = C_{25} = C_{34} = C_{35} = C_{46} = C_{56} = 0$. 
+Applying $C'_{ijkl} = a_{im}a_{jn}a_{kp}a_{lq}C_{mnpq}$, any component containing an odd number of indices with value `1` or `2` flips sign ($C'_{ijkl} = -C_{ijkl}$). To satisfy Neumann's Principle, these terms must vanish: 
+
+$$C_{14} = C_{15} = C_{24} = C_{25} = C_{34} = C_{35} = C_{46} = C_{56} = 0$$
 
 This cleanly eliminates 8 parameters, leaving **13 independent constants**:
 
@@ -83,14 +85,14 @@ $$
 
 ---
 
-### 2. Orthorhombic System (9 Independent Constants)
-Possesses three mutually perpendicular 2-fold rotation axes. Adding a second 2-fold rotation (e.g., about the $y$-axis) introduces a second transformation matrix:
+### 2. Orthorhombic System (3 Mutually Perpendicular Two-Fold Axes $\rightarrow$ 9 Independent Constants)
+Possesses three mutually perpendicular 2-fold rotation axes. Adding a second independent 2-fold rotation (e.g., about the $y$-axis) introduces an additional transformation step:
 
 $$
 a = \begin{bmatrix} -1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & -1 \end{bmatrix}
 $$
 
-This operation eliminates all remaining cross-coupling terms containing single-direction dependencies ($C_{16} = C_{26} = C_{36} = C_{45} = 0$), leaving **9 independent constants**:
+This second operation eliminates all remaining shear-axial cross-coupling terms containing single-direction dependencies ($C_{16} = C_{26} = C_{36} = C_{45} = 0$), completely separating normal stresses from pure shear planes to yield **9 independent constants**:
 
 $$
 \begin{bmatrix}
@@ -105,75 +107,104 @@ $$
 
 ---
 
-### 3. Tetragonal System (6 or 7 Independent Constants)
-Introduces a 4-fold rotation axis parallel to the $z$-axis ($x_3$). A clockwise 90° ($\pi/2$ rad) rotation maps coordinates as $x_1 \rightarrow x_2$ and $x_2 \rightarrow -x_1$:
-$$a = \begin{bmatrix} 0 & 1 & 0 \\ -1 & 0 & 0 \\ 0 & 0 & 1 \end{bmatrix}$$
+### 3. Trigonal System (1 Three-Fold Rotation Axis $\rightarrow$ 6 or 7 Independent Constants)
+Characterized by a single 3-fold rotation axis ($C_3$, $120^\circ$ rotation) parallel to the principal axis ($z$). The rotation intermixes coordinates in the $xy$-basal plane, generating dependencies that enforce structural couplings ($C_{11} = C_{22}$, $C_{13} = C_{23}$, $C_{44} = C_{55}$). Depending on whether additional 2-fold axes are present in the point group, it yields either **6 or 7 independent constants**:
+
+$$
+\begin{bmatrix}
+C_{11} & C_{12} & C_{13} & C_{14} & 0 & 0 \\
+C_{12} & C_{11} & C_{13} & -C_{14} & 0 & 0 \\
+C_{13} & C_{13} & C_{33} & 0 & 0 & 0 \\
+C_{14} & -C_{14} & 0 & C_{44} & 0 & 0 \\
+0 & 0 & 0 & 0 & C_{44} & C_{14} \\
+0 & 0 & 0 & 0 & C_{14} & \frac{1}{2}(C_{11} - C_{12})
+\end{bmatrix}
+$$
+
+---
+
+### 4. Tetragonal System (1 Four-Fold Rotation Axis $\rightarrow$ 6 or 7 Independent Constants)
+Introduces a single 4-fold rotation axis ($C_4$) parallel to the $z$-axis ($x_3$). A clockwise $90^\circ$ ($\pi/2$ rad) rotation maps coordinates as $x_1 \rightarrow x_2$ and $x_2 \rightarrow -x_1$:
+
+$$
+a = \begin{bmatrix} 0 & 1 & 0 \\ -1 & 0 & 0 \\ 0 & 0 & 1 \end{bmatrix}
+$$
 
 Let us compute a transformed tensor component using this mapping to see how variables become linked:
-$$C'_{1111} = a_{12}a_{12}a_{12}a_{12}C_{2222} = (1)(1)(1)(1)C_{2222} = C_{2222}$$
-Because $C'_{1111} = C_{1111}$, it proves **$C_{11} = C_{22}$**. Tracking this operation across the remaining components reveals:
-* $C_{11} = C_{22}$
-* $C_{13} = C_{23}$
-* $C_{44} = C_{55}$
-* $C_{16} = -C_{26}$
 
-For lower symmetry tetragonal classes (point groups $4, \bar{4}, 4/m$), $C_{16}$ remains non-zero, yielding **7 independent constants**. For higher tetragonal classes ($4mm, \bar{4}2m, 422, 4/mmm$), additional secondary 2-fold axes force $C_{16} = 0$, dropping the tensor to **6 independent constants**:
-$$\begin{bmatrix}
+$$
+C'_{1111} = a_{12}a_{12}a_{12}a_{12}C_{2222} = (1)(1)(1)(1)C_{2222} = C_{2222}
+$$
+
+Because $C'_{1111} = C_{1111}$, it proves $C_{11} = C_{22}$. Tracking this mapping links the variables into symmetry pairs ($C_{11} = C_{22}$, $C_{13} = C_{23}$, $C_{44} = C_{55}$, and $C_{16} = -C_{26}$).
+
+For lower symmetry tetragonal point groups ($4, \bar{4}, 4/m$), $C_{16}$ remains active (**7 independent constants**). For higher tetragonal classes ($4mm, \bar{4}2m, 422, 4/mmm$), perpendicular secondary 2-fold axes force $C_{16} = 0$, dropping the tensor to **6 independent constants**:
+
+$$
+\begin{bmatrix}
 C_{11} & C_{12} & C_{13} & 0 & 0 & 0 \\
 C_{12} & C_{11} & C_{13} & 0 & 0 & 0 \\
 C_{13} & C_{13} & C_{33} & 0 & 0 & 0 \\
 0 & 0 & 0 & C_{44} & 0 & 0 \\
 0 & 0 & 0 & 0 & C_{44} & 0 \\
 0 & 0 & 0 & 0 & 0 & C_{66}
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 ---
 
-### 4. Hexagonal System (5 Independent Constants)
-Characterized by a 6-fold rotation axis ($\pi/3$ rad) along $z$. This operational step imposes complete rotational isotropy within the basal $xy$-plane. Along with mapping $C_{11} = C_{22}$, $C_{13} = C_{23}$, and $C_{44} = C_{55}$, it establishes a strict mathematical constraint forcing the shear resistance coordinate $C_{66}$ to directly depend on the axial expansions:
-$$C_{66} = \frac{1}{2}(C_{11} - C_{12})$$
-All other asymmetric off-diagonal parameters are entirely eliminated, leaving exactly **5 independent constants**:
-$$\begin{bmatrix}
+### 5. Hexagonal System (1 Six-Fold Rotation Axis $\rightarrow$ 5 Independent Constants)
+Characterized by a single 6-fold rotation axis ($C_6$, $60^\circ$ rotation) along the $z$-axis. This higher order axial rotation induces complete elastodynamic isotropy within the basal $xy$-plane. Along with maintaining the tetragonal mappings ($C_{11} = C_{22}$, $C_{13} = C_{23}$, $C_{44} = C_{55}$), it sets a strict mechanical constraint that forces the pure in-plane shear modulus $C_{66}$ to depend directly on the primary directional expansion terms:
+
+$$
+C_{66} = \frac{1}{2}(C_{11} - C_{12})
+$$
+
+All remaining off-diagonal elements vanish, leaving exactly **5 independent constants**:
+
+$$
+\begin{bmatrix}
 C_{11} & C_{12} & C_{13} & 0 & 0 & 0 \\
 C_{12} & C_{11} & C_{13} & 0 & 0 & 0 \\
 C_{13} & C_{13} & C_{33} & 0 & 0 & 0 \\
 0 & 0 & 0 & C_{44} & 0 & 0 \\
 0 & 0 & 0 & 0 & C_{44} & 0 \\
 0 & 0 & 0 & 0 & 0 & \frac{1}{2}(C_{11} - C_{12})
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 ---
 
-### 5. Cubic System (3 Independent Constants: $C_{11}, C_{12}, C_{44}$)
-The cubic system represents the highest symmetry crystal class. It inherits all 4-fold axial rotations of the tetragonal class, but introduces primary multi-axis operations: **3-fold rotations about the four internal $[111]$ body diagonals**. 
+### 6. Cubic System (4 Three-Fold Rotation Axes $\rightarrow$ 3 Independent Constants)
+The cubic system represents the highest possible crystal symmetry family. It retains the single 4-fold axial operations along the cell edges but introduces **4 independent 3-fold rotation axes ($C_3$) pointing down the internal $[111]$ body diagonals**. 
 
-A counter-clockwise rotation of 120° ($2\pi/3$ rad) around $[111]$ cyclically permutes the coordinate axes ($x_1 \rightarrow x_2 \rightarrow x_3 \rightarrow x_1$), yielding the transformation matrix:
-$$a = \begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0 \end{bmatrix}$$
+A counter-clockwise rotation of $120^\circ$ ($2\pi/3$ rad) around a $[111]$ direction cyclically permutes all three spatial axes simultaneously ($x_1 \rightarrow x_2 \rightarrow x_3 \rightarrow x_1$), yielding the transformation matrix:
 
-Let's apply this to our remaining tetragonal parameters to see the ultimate reduction:
-* **For Diagonal Terms:**
-  $$C'_{2222} = a_{23}a_{23}a_{23}a_{23}C_{3333} = (1)(1)(1)(1)C_{3333} \implies C_{22} = C_{33}$$
-  Since the tetragonal run already proved $C_{11} = C_{22}$, this enforces:
-  $$C_{11} = C_{22} = C_{33}$$
-* **For Off-Diagonal Terms:**
-  $$C'_{1122} = a_{12}a_{12}a_{23}a_{23}C_{2233} \implies C_{12} = C_{23}$$
-  Combining this with symmetric equivalence forces all principal axial coupling to converge:
-  $$C_{12} = C_{13} = C_{23}$$
-* **For Shear Terms:**
+$$
+a = \begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0 \end{bmatrix}
+$$
+
+Applying this cyclic symmetry across our remaining variables collapses the matrix entirely:
+
+* **Principal Moduli Equivalency:** $$C'_{2222} = a_{23}a_{23}a_{23}a_{23}C_{3333} \implies C_{22} = C_{33}$$
+  Combined with our prior tetragonal steps, this locks all three principal axes to a single value: $C_{11} = C_{22} = C_{33}$.
+* **Cross-Coupling Moduli Equivalency:**
+  $$C'_{1122} = a_{12}a_{12}a_{23}a_{23}C_{2233} \implies C_{12} = C_{23} = C_{13}$$
+* **Shear Moduli Equivalency:**
   $$C'_{2323} = a_{23}a_{31}a_{23}a_{31}C_{3131} \implies C_{44} = C_{55} = C_{66}$$
 
-Every cross-coupling component is driven to zero, collapsing the matrix cleanly from 21 down to exactly **3 independent variables**:
-$$\begin{bmatrix}
+Every cross-coupling term vanishes, leaving exactly **3 independent elastic variables** ($C_{11}, C_{12}, C_{44}$):
+
+$$
+\begin{bmatrix}
 C_{11} & C_{12} & C_{12} & 0 & 0 & 0 \\
 C_{12} & C_{11} & C_{12} & 0 & 0 & 0 \\
 C_{12} & C_{12} & C_{11} & 0 & 0 & 0 \\
 0 & 0 & 0 & C_{44} & 0 & 0 \\
 0 & 0 & 0 & 0 & C_{44} & 0 \\
 0 & 0 & 0 & 0 & 0 & C_{44}
-\end{bmatrix}$$
-
----
-
+\end{bmatrix}
+$$
 ## Step 4: Extracting the Output from OUTCAR
 
 When your calculation finishes, open your `OUTCAR` file and scroll down to the bottom. VASP evaluates the calculations step-by-step and prints several block segments:
