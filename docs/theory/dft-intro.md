@@ -1,4 +1,4 @@
-# Introduction to Density Functional Theory (DFT)
+# Introduc# Introduction to Density Functional Theory (DFT)
 
 Welcome to the theoretical core of this hub. Before executing calculations in code packages, it is essential to understand how quantum mechanics is simplified to predict the properties of real materials.
 
