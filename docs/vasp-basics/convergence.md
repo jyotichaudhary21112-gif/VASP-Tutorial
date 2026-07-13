@@ -39,3 +39,40 @@ E=$(grep "FREE ENERGIE" OUTCAR | tail -1 | awk '{print $5}')
 echo "$i$E" >> encut_convergence.dat
 done
 
+```
+---
+
+## 2. K-Point Grid Density (KPOINTS) Convergence
+
+The `KPOINTS` file controls how the continuous Brillouin zone of your crystal lattice is sampled across a discrete grid. For metals, a denser grid is necessary to capture the sharp Fermi surface accurately, while insulators can get away with a much sparser grid.
+
+### Step-by-Step Hands-On Guide
+1. **Fix your ENCUT:** Keep your `ENCUT` value locked at the converged parameter you found in Step 1 (e.g., 500 eV).
+2. **Keep Core Files Constant:** Keep your `INCAR` settings and `POSCAR` structure completely identical.
+3. **Vary the Grid:** Systematically increase the mesh dimensions in the `KPOINTS` file (e.g., $4\times4\times4$, $6\times6\times6$, $8\times8\times8$, etc.) and record the final total free energy.
+
+### Example Automation Script (`run_kpoints.sh`)
+You can automate this grid sweep using a bash script that overwrites the `KPOINTS` file in each loop iteration:
+
+```bash
+#!/bin/bash
+# Loop over Monkhorst-Pack grid sizes
+for k in 4 6 8 10 12 14
+do
+cat > KPOINTS << EOF
+K-Points Convergence Loop
+0
+Monkhorst-Pack
+$k $k$k
+0  0  0
+EOF
+
+echo "Running VASP for KPOINTS grid = ${k}x${k}x${k}..."
+mpirun -np 4 vasp_std
+
+# Extract total free energy from OUTCAR
+E=$(grep "FREE ENERGIE" OUTCAR | tail -1 | awk '{print $5}')
+echo "$k$E" >> kpoints_convergence.dat
+done
+
+```
