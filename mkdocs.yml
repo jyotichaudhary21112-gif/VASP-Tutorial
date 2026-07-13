@@ -1,0 +1,35 @@
+site_name: Advanced Materials Modeling Hub
+site_description: A complete hands-on workflow manual for VASP calculations.
+
+theme:
+  name: material
+  palette:
+    primary: indigo
+    accent: blue
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - content.code.copy
+
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.superfences
+
+nav:
+  - Home: index.md
+  - 1. Theoretical Foundations:
+      - Introduction to DFT: theory/dft-intro.md
+      - Exchange-Correlation Functionals: theory/xc-functionals.md
+  - 2. VASP Basics & Convergence:
+      - Input Files (The Big 4): vasp-basics/inputs.md
+      - ENCUT & KPOINTS Convergence: vasp-basics/convergence.md
+      - Geometry Relaxation Regimes: vasp-basics/relaxation.md
+  - 3. Bulk & Mechanical Properties:
+      - Equation of State & Bulk Modulus: bulk/eos.md
+      - Elastic Constants Matrix (All Crystal Systems): bulk/elastic.md
+  - 4. Surface & Defect Engineering:
+      - Surface Energy Slabs: surfaces/surface-energy.md
+      - Generalized Stacking Faults (GSFE): surfaces/stacking-faults.md
+  - 5. Kinetics & Reaction Pathways:
+      - Nudged Elastic Band (NEB) Workflows: kinetics/neb.md
