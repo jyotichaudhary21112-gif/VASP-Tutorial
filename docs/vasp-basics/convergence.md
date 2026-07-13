@@ -13,54 +13,6 @@ The plane-wave cutoff determines the maximum kinetic energy of the plane waves u
 ### Step-by-Step Hands-On Guide
 To test `ENCUT`, keep your lattice coordinates and `KPOINTS` fixed, and systematically vary the cutoff energy. A good rule of thumb is to start from the maximum `ENMAX` value found in your `POTCAR` file and scale upward.
 
-
-### Analyzing the Output Data
-The script saves your results into a file named `encut_convergence.dat`. Plot these values (Total Energy vs. ENCUT) to find the convergence plateau. You are looking for the point where increasing the cutoff energy no longer significantly changes the total energy.
-
-| ENCUT (eV) | Total Energy $E_0$ (eV) | $\Delta E$ per atom (meV) | Status |
-| :--- | :--- | :--- | :--- |
-| 350 | -14.2345 | — | Un-converged |
-| 400 | -14.2678 | 33.3 | Un-converged |
-| 450 | -14.2712 | 3.4 | Marginal |
-| **500** | **-14.2721** | **0.9** | **Converged ✔️** |
-| 550 | -14.2723 | 0.2 | Fully Converged |
-
-> 📌 **VASP Pro-Tip:** Once you find your converged `ENCUT` value, increase it by **15–20%** if you plan to run variable-volume cell relaxations (`ISIF = 3`). This prevents artificial errors known as Pulay stress.
-
----
-
-## 2. K-Point Grid Density (KPOINTS) Convergence
-
-The `KPOINTS` file controls how the continuous Brillouin zone is sampled across a discrete grid. For metals, a denser grid is necessary to capture the sharp Fermi surface accurately, while insulators can get away with a sparser grid.
-
-### Step-by-Step Hands-On Guide
-1. Fix your `ENCUT` value at the converged value you determined in Step 1 (e.g., 500 eV).
-2. Keep your `INCAR` and `POSCAR` completely identical.
-3. Systematically increase the grid size in the `KPOINTS` file (e.g., $4\times4\times4$, $6\times6\times6$, $8\times8\times8$, etc.) and record the total energy.
-
-### Example Automation Script (`run_kpoints.sh`)
-You can automate this grid sweep using a bash script that overwrites the `KPOINTS` file in each iteration:
-
-```bash
-#!/bin/bash
-# Loop over Monkhorst-Pack grid sizes
-for k in 4 6 8 10 12 14
-do
-cat > KPOINTS << EOF
-K-Points Convergence Loop
-0
-Monkhorst-Pack
-$k $k$k
-0  0  0
-EOF
-
-echo "Running VASP for KPOINTS grid = ${k}x${k}x${k}..."
-mpirun -np 4 vasp_std
-
-# Extract total free energy
-E=$(grep "FREE ENERGIE" OUTCAR | tail -1 | awk '{print $5}')
-echo "$k$E" >> kpoints_convergence.dat
-done
 ### Example Bash Script for Automation (`run_encut.sh`)
 Instead of manually modifying the `INCAR` file every time, you can use this simple automation script to run the calculations sequentially:
 
@@ -83,7 +35,6 @@ echo "Running VASP for ENCUT = $i eV..."
 mpirun -np 4 vasp_std
 
 # Extract total free energy (TOTEN) from the OUTCAR file
-
-
-
+E=$(grep "FREE ENERGIE" OUTCAR | tail -1 | awk '{print $5}')
+echo "$i$E" >> encut_convergence.dat
 done
