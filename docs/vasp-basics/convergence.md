@@ -37,6 +37,7 @@ echo "Running VASP for ENCUT = $i eV..."
 mpirun -np 4 vasp_std
 
 # Extract total free energy (TOTEN) from the OUTCAR file
-E=$(grep "FREE ENERGIE" OUTCAR | tail -1 | awk '{print $5}')
-echo "$i$E" >> encut_convergence.dat
+
+
+
 done
