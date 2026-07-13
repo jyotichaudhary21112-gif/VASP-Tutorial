@@ -8,14 +8,14 @@ Welcome to the theoretical core of this hub. Before executing calculations in co
 
 To find the ground-state energy of a crystal lattice, we must solve the time-independent Schrödinger equation for a system of interacting nuclei and electrons:
 
-$$\hat{H}\Psi = E\Psi$$
+$$
+\hat{H}\Psi = E\Psi
+$$
 
 For a realistic solid with $N$ electrons and $M$ nuclei, the full quantum mechanical Hamiltonian operator $\hat{H}$ consists of five distinct terms:
 
-
-
 $$
-\hat{H} = -\sum_{i=1}^{N} \frac{\hbar^{2}}{2m_{e}}\nabla_{i}^{2} - \sum_{A=1}^{M} \frac{\hbar^{2}}{2M_{A}}\nabla_{A}^{2} - \sum_{i=1}^{N} \sum_{A=1}^{M} \frac{Z_{A}e^{2}}{4\pi\epsilon_{0}r_{iA}} + \sum_{i,j (i \neq j)}^{N} \frac{1}{2} \frac{e^{2}}{4\pi\epsilon_{0}r_{ij}} + \sum_{A,B (A \neq B)}^{M} \frac{1}{2} \frac{Z_{A}Z_{B}e^{2}}{4\pi\epsilon_{0}R_{AB}}
+\hat{H} = -\sum_{i=1}^{N} \frac{\hbar^{2}}{2m_{e}}\nabla_{i}^{2} - \sum_{A=1}^{M} \frac{\hbar^{2}}{2M_{A}}\nabla_{A}^{2} - \sum_{i=1}^{N} \sum_{A=1}^{M} \frac{Z_{A}e^{2}}{4\pi\epsilon_{0}r_{iA}} + \sum_{i \neq j}^{N} \frac{1}{2} \frac{e^{2}}{4\pi\epsilon_{0}r_{ij}} + \sum_{A \neq B}^{M} \frac{1}{2} \frac{Z_{A}Z_{B}e^{2}}{4\pi\epsilon_{0}R_{AB}}
 $$
 
 ### The Terms Broken Down:
@@ -25,7 +25,7 @@ $$
 4. **Electron-Electron Repulsion:** Inter-electronic repulsion forces.
 5. **Nuclear-Nuclear Repulsion:** Inter-nuclear repulsion forces.
 
-Because every electron interacts simultaneously with every other electron, the exact wave function $\Psi(\mathbf{r}_1, \mathbf{r}_2, \dots, \mathbf{r}_N)$ depends on $3N$ spatial coordinates. For a simple macroscopic piece of metal containing $\sim 10^{23}$ particles, solving this equation directly is completely impossible.
+Because every electron interacts simultaneously with every other electron, the exact wave function $\Psi$ depends on $3N$ spatial coordinates. For a simple macroscopic piece of metal containing $\sim 10^{23}$ particles, solving this equation directly is completely impossible.
 
 ---
 
@@ -50,16 +50,15 @@ Kohn and Sham mapped the impossible problem of interacting electrons onto a fict
 
 The total energy functional is partitioned cleanly:
 
-$$E[\rho] = T_s[\rho] + E_H[\rho] + E_{\text{ext}}[\rho] + E_{\text{xc}}[\rho]$$
+$$
+E[\rho] = T_{s}[\rho] + E_{H}[\rho] + E_{\text{ext}}[\rho] + E_{\text{xc}}[\rho]
+$$
 
 Where:
-* $T_s[\rho]$ is the kinetic energy of non-interacting electrons.
-* $E_H[\rho]$ is the classical Hartree electron-electron repulsion energy.
+* $T_{s}[\rho]$ is the kinetic energy of non-interacting electrons.
+* $E_{H}[\rho]$ is the classical Hartree electron-electron repulsion energy.
 * $E_{\text{ext}}[\rho]$ is the external potential energy from the fixed nuclei.
-* **$E_{\text{xc}}[\rho]$ (Exchange-Correlation Functional):** This contains all remaining complex quantum mechanical errors (many-body exchange interactions, electron correlation, and the kinetic energy correction).
-
-Because the exact mathematical shape of $E_{\text{xc}}$ is unknown, we must use approximations like the **Local Density Approximation (LDA)** or the **Generalized Gradient Approximation (GGA-PBE)**.
-
+* **$E_{\text{xc}}[\rho]$ (Exchange-Correlation Functional):** This contains all remaining complex quantum mechanical errors.
 ---
 
 ## 🛠️ Ground State Self-Consistent Field (SCF) Cycle
