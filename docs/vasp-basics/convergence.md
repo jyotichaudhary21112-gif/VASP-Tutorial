@@ -38,3 +38,4 @@ mpirun -np 4 vasp_std
 E=$(grep "FREE ENERGIE" OUTCAR | tail -1 | awk '{print $5}')
 echo "$i$E" >> encut_convergence.dat
 done
+
