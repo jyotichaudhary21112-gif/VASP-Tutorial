@@ -21,7 +21,7 @@ $$\hat{H} = -\sum_{i=1}^{N} \frac{\hbar^2}{2m_e}\nabla_i^2 - \sum_{A=1}^{M} \fra
 4. **Electron-Electron Repulsion:** Inter-electronic repulsion forces.
 5. **Nuclear-Nuclear Repulsion:** Inter-nuclear repulsion forces.
 
-Because every electron interacts simultaneously with every other electron, the exact wave function $\Psi(\mathbf{r}_1, \mathbf{r}_2, ..., \mathbf{r}_n)$ depends on $3N$ spatial coordinates. For a simple macroscopic piece of metal containing $\sim 10^{23}$ particles, solving this equation directly is completely impossible.
+Because every electron interacts simultaneously with every other electron, the exact wave function $\Psi(\mathbf{r}_1, \mathbf{r}_2, \dots, \mathbf{r}_N)$ depends on $3N$ spatial coordinates. For a simple macroscopic piece of metal containing $\sim 10^{23}$ particles, solving this equation directly is completely impossible.
 
 ---
 
