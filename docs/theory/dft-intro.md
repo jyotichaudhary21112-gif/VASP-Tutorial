@@ -15,7 +15,7 @@ For a realistic solid with $N$ electrons and $M$ nuclei, the full quantum mechan
 
 
 $$
-\hat{H} = -\sum_{i=1}^{N}\frac{\hbar^{2}}{2m_{e}}\nabla_{i}^{2}-\sum_{A=1}^{M}\frac{\hbar^{2}}{2M_{A}}\nabla_{A}^{2}-\sum_{i=1}^{N}\sum_{A=1}^{M}\frac{Z_{A}e^{2}}{4\pi\epsilon_{0}r_{iA}}+\sum_{i<j}^{N}\frac{e^{2}}{4\pi\epsilon_{0}r_{ij}}+\sum_{A<B}^{M}\frac{Z_{A}Z_{B}e^{2}}{4\pi\epsilon_{0}R_{AB}}
+\hat{H} = -\sum_{i=1}^{N} \frac{\hbar^{2}}{2m_{e}}\nabla_{i}^{2} - \sum_{A=1}^{M} \frac{\hbar^{2}}{2M_{A}}\nabla_{A}^{2} - \sum_{i=1}^{N} \sum_{A=1}^{M} \frac{Z_{A}e^{2}}{4\pi\epsilon_{0}r_{iA}} + \sum_{i,j (i \neq j)}^{N} \frac{1}{2} \frac{e^{2}}{4\pi\epsilon_{0}r_{ij}} + \sum_{A,B (A \neq B)}^{M} \frac{1}{2} \frac{Z_{A}Z_{B}e^{2}}{4\pi\epsilon_{0}R_{AB}}
 $$
 
 ### The Terms Broken Down:
