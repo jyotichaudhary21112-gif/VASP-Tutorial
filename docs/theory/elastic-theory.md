@@ -61,33 +61,47 @@ Let us track how increasing crystal operations systematically eliminate and link
 
 ### 1. Monoclinic System (13 Independent Constants)
 Characterized by a single 2-fold rotation axis or a mirror plane perpendicular to an axis (traditionally chosen along the $y$ or $z$ axis). Assuming a 2-fold rotation about the $z$-axis ($x_3$), the transformation matrix is:
-$$a = \begin{bmatrix} -1 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & 1 \end{bmatrix}$$
-Applying $C'_{ijkl} = a_{im}a_{jn}a_{kp}a_{lq}C_{mnpq}$, any component containing an odd number of indices with value `1` or `2` flips sign ($C'_{ijkl} = -C_{ijkl}$). To satisfy Neumann's Principle, these terms must vanish:
-$$C_{14} = C_{15} = C_{24} = C_{25} = C_{34} = C_{35} = C_{46} = C_{56} = 0$$
+
+$$
+a = \begin{bmatrix} -1 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & 1 \end{bmatrix}
+$$
+
+Applying $C'_{ijkl} = a_{im}a_{jn}a_{kp}a_{lq}C_{mnpq}$, any component containing an odd number of indices with value `1` or `2` flips sign ($C'_{ijkl} = -C_{ijkl}$). To satisfy Neumann's Principle, these terms must vanish: $C_{14} = C_{15} = C_{24} = C_{25} = C_{34} = C_{35} = C_{46} = C_{56} = 0$. 
+
 This cleanly eliminates 8 parameters, leaving **13 independent constants**:
-$$\begin{bmatrix}
+
+$$
+\begin{bmatrix}
 C_{11} & C_{12} & C_{13} & 0 & 0 & C_{16} \\
 C_{12} & C_{22} & C_{23} & 0 & 0 & C_{26} \\
 C_{13} & C_{23} & C_{33} & 0 & 0 & C_{36} \\
 0 & 0 & 0 & C_{44} & C_{45} & 0 \\
 0 & 0 & 0 & C_{45} & C_{55} & 0 \\
 C_{16} & C_{26} & C_{36} & 0 & 0 & C_{66}
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 ---
 
 ### 2. Orthorhombic System (9 Independent Constants)
 Possesses three mutually perpendicular 2-fold rotation axes. Adding a second 2-fold rotation (e.g., about the $y$-axis) introduces a second transformation matrix:
-$$a = \begin{bmatrix} -1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & -1 \end{bmatrix}$$
+
+$$
+a = \begin{bmatrix} -1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & -1 \end{bmatrix}
+$$
+
 This operation eliminates all remaining cross-coupling terms containing single-direction dependencies ($C_{16} = C_{26} = C_{36} = C_{45} = 0$), leaving **9 independent constants**:
-$$\begin{bmatrix}
+
+$$
+\begin{bmatrix}
 C_{11} & C_{12} & C_{13} & 0 & 0 & 0 \\
 C_{12} & C_{22} & C_{23} & 0 & 0 & 0 \\
 C_{13} & C_{23} & C_{33} & 0 & 0 & 0 \\
 0 & 0 & 0 & C_{44} & 0 & 0 \\
 0 & 0 & 0 & 0 & C_{55} & 0 \\
 0 & 0 & 0 & 0 & 0 & C_{66}
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 ---
 
