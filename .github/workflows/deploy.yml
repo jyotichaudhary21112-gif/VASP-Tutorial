@@ -1,0 +1,31 @@
+name: Deploy Documentation Website
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure Python Environment
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          key: ${{ github.ref }}
+          path: .cache
+
+      - name: Install MkDocs Material Theme
+        run: pip install mkdocs-material pymdown-extensions
+
+      - name: Build and Publish to GitHub Pages
+        run: mkdocs gh-deploy --force
