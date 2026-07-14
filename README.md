@@ -33,11 +33,6 @@ Consistency is critical. To ensure your calculations are converged:
    grep "ENMAX" POTCAR
 
 
-# VASP Computational Tutorials & Research
-
-Welcome to my research repository. This space tracks my journey in **Density Functional Theory (DFT)** and **Solidification Theory**, specifically focusing on refractory metals like Cr, Mo, and W.
-
----
 
 ## 1. ⚙️ VASP Configuration Reference
 The `INCAR` file is the control center for your simulations. Use this reference to understand the core tags required for stable metallic calculations.
