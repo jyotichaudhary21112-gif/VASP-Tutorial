@@ -16,7 +16,21 @@ The tutorial site is organized logically into five core pillars:
 4. **Surface & Defect Engineering** – Slicing crystal lattices to calculate Surface Energies ($\gamma$), extracting **Electrostatic Work Functions ($\Phi$)** via planar-averaged electrostatic potentials (`LOCPOT`), predicting equilibrium Wulff Shapes, and mapping Generalized Stacking Fault Energies (GSFE).
 5. **Kinetics & Reaction Pathways** – Locating transition states and activation energy barriers using the Nudged Elastic Band (NEB) method.
 ---
+## 🧪 DFT Calculation Setup: VASP Best Practices
 
+When setting up your VASP calculations, the accuracy of your results depends heavily on the chosen pseudopotentials and the energy cutoff (`ENCUT`).
+
+### Pseudopotential Selection
+For transition metals like Molybdenum (Mo) and Tungsten (W), choose your `POTCAR` files based on the required level of accuracy:
+* **`_sv` (semi-core s- and p-valence):** Recommended for high-precision structural and energetic studies.
+* **`_pv` (semi-core p-valence):** A balanced choice for general bulk and surface calculations.
+
+### Setting the Energy Cutoff (ENCUT)
+Consistency is critical. To ensure your calculations are converged:
+
+1. **Check ENMAX:** Locate the `ENMAX` value inside your `POTCAR` files. You can find this by running the following command in your terminal:
+   ```bash
+   grep "ENMAX" POTCAR
 ## 🛠️ How to Run This Documentation Locally
 
 This website is built using **MkDocs** with the premium **Material theme**. If you want to clone this repository and preview the site locally on your computer, follow these simple steps:
