@@ -31,6 +31,53 @@ Consistency is critical. To ensure your calculations are converged:
 1. **Check ENMAX:** Locate the `ENMAX` value inside your `POTCAR` files. You can find this by running the following command in your terminal:
    ```bash
    grep "ENMAX" POTCAR
+
+
+# VASP Computational Tutorials & Research
+
+Welcome to my research repository. This space tracks my journey in **Density Functional Theory (DFT)** and **Solidification Theory**, specifically focusing on refractory metals like Cr, Mo, and W.
+
+---
+
+## 1. ⚙️ VASP Configuration Reference
+The `INCAR` file is the control center for your simulations. Use this reference to understand the core tags required for stable metallic calculations.
+
+| Tag | Category | Purpose | When to use |
+| :--- | :--- | :--- | :--- |
+| `PREC` | Accuracy | Precision level | Always set to `Accurate` for reliable energies. |
+| `ENCUT` | Energy | Plane-wave cutoff | Must be set to $1.3 \times \max(ENMAX)$ from `POTCAR`. |
+| `ALGO` | Solver | Electronic algorithm | `Fast` is more stable than `Normal` for cell relaxation. |
+| `ISMEAR` | Integration | Brillouin zone sampling | `1` is standard for metallic systems. |
+| `SIGMA` | Broadening | Fermi surface broadening | `0.1-0.2` helps stabilize metallic occupation. |
+| `ISIF` | Geometry | Structural constraints | `2` for ion relaxation, `3` for full cell relaxation. |
+| `EDIFFG` | Stopping | Force convergence | `-0.01` ensures atoms are well-relaxed. |
+| `ISYM` | Symmetry | Symmetrization | `0` disables symmetry to prevent numerical crashes. |
+
+
+
+---
+
+## 2. 🚀 The Systematic Relaxation Workflow
+To avoid the `ZPOTRF` error, never start with a full cell relaxation. Follow these stages:
+
+### Phase A: Ion Relaxation (Fixed Cell)
+Use this to allow atoms to settle into their positions without changing the cell dimensions.
+* **INCAR:** `ISIF = 2`, `IBRION = 2`, `ALGO = Fast`.
+
+### Phase B: Full Cell Relaxation
+Once Phase A converges, use the resulting `CONTCAR` as your new `POSCAR` to relax the cell shape and volume.
+* **INCAR:** `ISIF = 3`, `ALGO = Fast`.
+
+---
+
+## 3. 🛠 Troubleshooting: "ZPOTRF" Failure
+If you encounter `LAPACK: Routine ZPOTRF failed!`, follow this recovery sequence:
+1. **Relax Precision:** Temporarily set `EDIFF = 1E-6` (you can tighten it later).
+2. **Disable Symmetry:** Set `ISYM = 0` in your `INCAR`.
+3. **Slow Down Mixing:** Add the following to your `INCAR`:
+   ```text
+   AMIX = 0.2
+   BMIX = 0.0001
 ## 🛠️ How to Run This Documentation Locally
 
 This website is built using **MkDocs** with the premium **Material theme**. If you want to clone this repository and preview the site locally on your computer, follow these simple steps:
