@@ -1,4 +1,4 @@
-# Derivation of the Third-Order Birch-Murnaghan Equation of State ($E(V)$)
+# Derivation of the Third-Order Birch-Murnaghan Equation of State $E(V)$
 
 To obtain the energy-volume $E(V)$ relationship from the third-order Birch-Murnaghan pressure equation, we integrate the pressure with respect to volume, utilizing the thermodynamic definition:
 
